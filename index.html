@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wash Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Login and Registration -->
+    <div id="loginView" class="login-page">
+        <div class="login-box">
+
+            <h1 class="logo">
+                <img src="washuplogo.png" alt="Wash Up Logo">
+                WashUp
+            </h1>
+
+            <p class="subtitle">Queue in Line, Clean in Time.</p>
+
+            <h2 id="loginTitle">Welcome Back</h2>
+            <p id="loginDescription">Log in to continue.</p>
+
+            <form id="loginForm">
+
+                <label for="loginRole">Account Type</label>
+                <select id="loginRole" name="loginRole">
+                    <option value="customer">Customer</option>
+                    <option value="admin">Admin</option>
+                </select>
+
+                <label for="loginUsername">Username</label>
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="Enter username"
+                    autocomplete="username"
+                    required
+                >
+
+                <label for="loginPassword">Password</label>
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button type="submit" id="loginButton">Log In</button>
+
+                <p id="loginMessage" class="message"></p>
+            </form>
+
+            <p id="registerPrompt">
+                No account yet?
+                <a href="#" onclick="showRegister(); return false;">
+                    Register here
+                </a>
+            </p>
+
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="appView" class="app hidden">
+
+        <aside class="sidebar">
+
+            <h2 class="logo">
+                <img src="washuplogo.png" alt="Wash Up Logo">
+                WashUp
+            </h2>
+
+            <p class="side-label">MENU</p>
+
+            <button
+                class="nav-link active"
+                onclick="showSection('dashboardSection', this)">
+                Dashboard
+            </button>
+
+            <button
+                id="newOrderNav"
+                class="nav-link"
+                onclick="showSection('orderSection', this)">
+                New Order
+            </button>
+
+            <button
+                id="queueNav"
+                class="nav-link"
+                onclick="showSection('queueSection', this)">
+                Queue Management
+            </button>
+
+            <button
+                class="nav-link"
+                onclick="showSection('trackingSection', this)">
+                Track Order
+            </button>
+
+            <button
+                class="nav-link"
+                onclick="showSection('ordersSection', this)">
+                My Orders
+            </button>
+
+            <div class="sidebar-bottom">
+                <p id="roleLabel">Customer</p>
+                <p id="currentUsername">Username</p>
+
+                <button class="logout-button" onclick="logout()">
+                    Log Out
+                </button>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <h2 id="pageTitle">Dashboard</h2>
+                    <p>Welcome to Wash Up.</p>
+                </div>
+
+                <div id="profileCircle" class="profile-circle">W</div>
+            </header>
+
+            <!-- Dashboard -->
+            <section id="dashboardSection" class="content-section active">
+
+                <div class="welcome-card">
+                    <div>
+                        <h2 id="welcomeTitle">Welcome to Wash Up!</h2>
+                        <p id="welcomeText">
+                            Laundry Day, Made Easy.
+                            Manage your laundry in just a few steps.
+                        </p>
+                    </div>
+
+                    <button
+                        id="dashboardOrderButton"
+                        onclick="showSection('orderSection')">
+                        Place an Order
+                    </button>
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <p>Available Machines</p>
+                        <h2 id="availableCount">10</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Occupied Machines</p>
+                        <h2 id="occupiedCount">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Waiting Orders</p>
+                        <h2 id="waitingCount">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Completed Orders</p>
+                        <h2 id="completedCount">0</h2>
+                    </div>
+
+                </div>
+
+                <div class="section-card">
+
+                    <div class="section-heading">
+                        <div>
+                            <h3>Washing Machines</h3>
+                            <p>Current machine availability</p>
+                        </div>
+                    </div>
+
+                    <div id="machineGrid" class="machine-grid"></div>
+
+                </div>
+
+                <div class="section-card">
+
+                    <h3 id="recentOrdersTitle">Recent Orders</h3>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Weight</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="recentOrdersBody"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- New Laundry Order -->
+            <section id="orderSection" class="content-section">
+
+                <div class="section-card form-card">
+
+                    <h3>New Laundry Order</h3>
+
+                    <p class="section-description">
+                        Enter your laundry details below.
+                    </p>
+
+                    <form id="orderForm">
+
+                        <label for="customerName">Customer Name</label>
+                        <input type="text" id="customerName" required>
+
+                        <label for="laundryWeight">Laundry Weight (kg)</label>
+                        <input
+                            type="number"
+                            id="laundryWeight"
+                            min="1"
+                            max="100"
+                            step="0.5"
+                            required
+                        >
+
+                        <label for="laundryService">Service</label>
+                        <input
+                            type="text"
+                            id="laundryService"
+                            value="Wash, Dry & Fold"
+                            readonly
+                        >
+
+                        <label for="serviceMethod">Service Method</label>
+                        <select id="serviceMethod" required>
+                            <option value="Pickup">Pickup</option>
+                            <option value="Delivery">Delivery</option>
+                        </select>
+
+                        <div class="price-box">
+                            <span>Price per kg</span>
+                            <strong>₱50</strong>
+
+                            <span>Total Price</span>
+                            <strong id="pricePreview">₱0.00</strong>
+                        </div>
+
+                        <button type="submit">Submit Order</button>
+
+                        <p id="orderMessage" class="message"></p>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+            <!-- Queue Management -->
+            <section id="queueSection" class="content-section">
+
+                <div class="section-card">
+
+                    <div class="section-heading">
+                        <div>
+                            <h3>Queue Management</h3>
+                            <p class="section-description">
+                                Orders are processed in first-in, first-out order.
+                            </p>
+                        </div>
+
+                        <button
+                            id="startNextButton"
+                            onclick="startNextOrder()">
+                            Start Next Order
+                        </button>
+                    </div>
+
+                    <p>
+                        Total Waiting:
+                        <strong id="queueTotal">0</strong>
+                    </p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Queue No.</th>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Weight</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="queueTableBody"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Order Tracking -->
+            <section id="trackingSection" class="content-section">
+
+                <div class="section-card form-card">
+
+                    <h3>Track Your Order</h3>
+
+                    <p class="section-description">
+                        Enter your order ID to check its status.
+                    </p>
+
+                    <form id="trackingForm">
+
+                        <label for="trackingOrderId">Order ID</label>
+                        <input
+                            type="text"
+                            id="trackingOrderId"
+                            placeholder="Example: FW-12345678"
+                            required
+                        >
+
+                        <button type="submit">Track Order</button>
+
+                    </form>
+
+                    <div id="trackingResult"></div>
+
+                </div>
+
+            </section>
+
+            <!-- Order History -->
+            <section id="ordersSection" class="content-section">
+
+                <div class="section-card">
+
+                    <h3 id="ordersSectionTitle">My Orders</h3>
+
+                    <p id="ordersDescription" class="section-description">
+                        View your laundry order history.
+                    </p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Weight</th>
+                                    <th>Total</th>
+                                    <th>Method</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="allOrdersBody"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <footer>
+                Wash Up Laundry System
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+
