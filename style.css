@@ -1,0 +1,586 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #2864b0;
+    --light-blue: #eaf2fc;
+    --dark: #1e293b;
+    --gray: #64748b;
+    --background: #f5f7fb;
+    --border: #e2e8f0;
+    --white: #ffffff;
+    --green: #16845b;
+    --red: #d94848;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background: var(--background);
+    color: var(--dark);
+    font-size: 14px;
+}
+h1, h2, h3, h4, h5, h6,
+button, input, select, textarea {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+p {
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+button, input, select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 16px;
+    background: var(--blue);
+    color: var(--white);
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #1d4f91;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    margin-bottom: 17px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--dark);
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--blue);
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+/* Login page */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: var(--background);
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 35px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.logo {
+    color: var(--blue);
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    margin-bottom: 30px;
+}
+
+.login-box h2 {
+    margin-bottom: 6px;
+}
+
+.login-box #loginDescription {
+    margin-bottom: 24px;
+}
+
+.login-box button[type="submit"] {
+    width: 100%;
+}
+
+.login-box a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#registerPrompt {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.message {
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+/* Main layout */
+
+.hidden {
+    display: none !important;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 235px;
+    padding: 25px 16px;
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.sidebar .logo {
+    padding: 0 10px;
+    margin-bottom: 35px;
+}
+
+.side-label {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 0 10px;
+    margin-bottom: 12px;
+}
+
+.nav-link {
+    text-align: left;
+    width: 100%;
+    background: transparent;
+    color: var(--gray);
+    margin-bottom: 6px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: var(--light-blue);
+    color: var(--blue);
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding: 20px 10px 0;
+    border-top: 1px solid var(--border);
+}
+
+.sidebar-bottom p {
+    margin-bottom: 5px;
+}
+
+.logout-button {
+    width: 100%;
+    margin-top: 15px;
+    background: #fceeee;
+    color: var(--red);
+}
+
+.logout-button:hover {
+    background: #f8dddd;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 28px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.topbar h2 {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.profile-circle {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: var(--light-blue);
+    color: var(--blue);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Page sections */
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.welcome-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 28px;
+    margin-bottom: 22px;
+    background: var(--light-blue);
+    border-radius: 14px;
+}
+
+.welcome-card h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.welcome-card p {
+    color: #526b8c;
+}
+
+.welcome-card button {
+    flex-shrink: 0;
+}
+
+/* Dashboard cards */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.stat-card p {
+    font-size: 13px;
+}
+
+.stat-card h2 {
+    font-size: 28px;
+    margin-top: 10px;
+    color: var(--blue);
+}
+
+/* Content cards */
+
+.section-card {
+    padding: 23px;
+    margin-bottom: 22px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.section-card h3 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+.section-description {
+    margin-bottom: 20px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Washing machines */
+
+.machine-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.machine-card {
+    padding: 17px 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-align: center;
+    background: var(--white);
+}
+
+.machine-card h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.machine-icon {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.machine-card p {
+    font-size: 12px;
+}
+
+/* Status labels */
+
+.status-pill {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--light-blue);
+    color: var(--blue);
+}
+
+.status-available {
+    background: #e7f7ee;
+    color: var(--green);
+}
+
+.status-occupied,
+.status-washing,
+.status-drying {
+    background: #fff1d6;
+    color: #9a6700;
+}
+
+.status-waiting-in-queue,
+.status-folding {
+    background: #eaf2fc;
+    color: var(--blue);
+}
+
+.status-ready-for-pickup,
+.status-out-for-delivery {
+    background: #f1eaff;
+    color: #7542a8;
+}
+
+.status-completed,
+.status-delivered {
+    background: #e7f7ee;
+    color: var(--green);
+}
+
+/* Tables */
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+th {
+    background: #f8fafc;
+    color: var(--gray);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+td {
+    font-size: 13px;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Order form */
+
+.form-card {
+    max-width: 650px;
+}
+
+.form-card form {
+    margin-top: 22px;
+}
+
+.form-card button[type="submit"] {
+    min-width: 140px;
+}
+
+.price-box {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding: 17px;
+    margin: 5px 0 20px;
+    background: var(--background);
+    border-radius: 9px;
+}
+
+.price-box span {
+    color: var(--gray);
+}
+
+.price-box strong {
+    text-align: right;
+}
+
+#trackingResult {
+    margin-top: 22px;
+}
+
+.tracking-card {
+    padding: 20px;
+    background: var(--background);
+    border-radius: 10px;
+}
+
+.tracking-card p {
+    margin-top: 10px;
+}
+
+.action-button {
+    padding: 8px 11px;
+    font-size: 12px;
+}
+
+footer {
+    padding: 15px 0;
+    text-align: center;
+    color: var(--gray);
+    font-size: 12px;
+}
+
+/* Smaller screens */
+
+@media (max-width: 1000px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .machine-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .sidebar {
+        width: 205px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    .app {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 15px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar .logo {
+        margin-bottom: 15px;
+    }
+
+    .side-label {
+        display: none;
+    }
+
+    .nav-link {
+        width: auto;
+        display: inline-block;
+        margin: 3px;
+        padding: 9px 11px;
+    }
+
+    .sidebar-bottom {
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .welcome-card {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 22px;
+    }
+
+    .machine-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section-card {
+        padding: 16px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 400px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .login-box {
+        padding: 24px;
+    }
+
+    .topbar h2 {
+        font-size: 21px;
+    }
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--blue);
+    font-size: 23px;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
